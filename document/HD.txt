@@ -1,0 +1,7 @@
+Huy98
+19/10/2023
+
+Lưu ý:Khi sử dụng ESP8266
+
+1. Không sử dụng thư viện Onebutton vì sẽ có xung đột
+2. Chỉ sử dụng thư viện blynk 1.2 (các bản từ 1.3.2 trở lại đều có lỗi, trừ bản 1.2)
