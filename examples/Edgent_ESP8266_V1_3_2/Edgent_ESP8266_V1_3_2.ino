@@ -63,7 +63,10 @@ void testConstStrPara(const char * p_tempConstStr){
 
 #include "BlynkEdgent.h"
 
-
+// BLYNK_WRITE(V1) //V1 is the Virtual Pin
+// {
+//         ;
+// }
 
 void setup()
 {

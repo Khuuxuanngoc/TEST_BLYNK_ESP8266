@@ -37,6 +37,7 @@
 #define pin_button 0
 #include <ESP8266WiFi.h> // Enable the use of wifi module. Make sure you downloaded and installed the ESP8266 library
 #include <BlynkSimpleEsp8266.h>
+#include "BlynkI2CVar.h"
 /**
  * @brief Note
  * 
@@ -71,26 +72,27 @@ void setup()
   Serial.begin(9600);
   Serial.print("RUN");
 
-  Blynk.begin(auth, ssid, pass);
+  // Blynk.begin(auth, ssid, pass);
   Serial.println("....OK");
 }
 
 void loop()
 {
-  Blynk.run();
-  if (digitalRead(pin_button) == LOW)
-  {
-    Blynk.virtualWrite(V0, 400);
-    Serial.println("button LOW");
-  }
-  else if (digitalRead(pin_button) == HIGH)
-  {
+  GetDataFromSerial(&Serial);
+  // Blynk.run();
+  // if (digitalRead(pin_button) == LOW)
+  // {
+  //   Blynk.virtualWrite(V0, 400);
+  //   Serial.println("button LOW");
+  // }
+  // else if (digitalRead(pin_button) == HIGH)
+  // {
 
-    Blynk.virtualWrite(V0, 200);
-    Serial.println("button HIGH");
-  }
+  //   Blynk.virtualWrite(V0, 200);
+  //   Serial.println("button HIGH");
+  // }
 
-  button_control_blynk();
+  // button_control_blynk();
 
 
 }

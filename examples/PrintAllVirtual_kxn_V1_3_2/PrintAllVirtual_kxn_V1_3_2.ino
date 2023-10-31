@@ -34,7 +34,8 @@
 // #include <BlynkSimpleEthernet.h>
 
 #include <ESP8266WiFi.h> // Enable the use of wifi module. Make sure you downloaded and installed the ESP8266 library
-#include <BlynkSimpleEsp8266.h>
+// #include <BlynkSimpleEsp8266.h>
+#include "BlynkSimpleEsp8266_SSL.h" // ok, the same as BlynkSimpleEsp8266.h
 
 char auth[] = BLYNK_AUTH_TOKEN;
 char ssid[] = "DESKTOPkxn";     // Key in your wifi name. You can check with your smart phone for your wifi name

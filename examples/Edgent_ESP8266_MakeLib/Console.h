@@ -207,9 +207,3 @@ BLYNK_WRITE(InternalPinDBG) {
   edgentConsole.runCommand((char*)cmd.c_str());
 }
 
-BLYNK_WRITE(V1) //V1 is the Virtual Pin
-{
-  int pinData = param.asInt(); // getting value from V1
-//   // your code here
-  edgentConsole.printf("Data %d hehe\n", pinData);
-}

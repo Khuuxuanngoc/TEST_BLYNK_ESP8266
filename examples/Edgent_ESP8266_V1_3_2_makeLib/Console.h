@@ -207,9 +207,23 @@ BLYNK_WRITE(InternalPinDBG) {
   edgentConsole.runCommand((char*)cmd.c_str());
 }
 
-BLYNK_WRITE(V1) //V1 is the Virtual Pin
-{
-  int pinData = param.asInt(); // getting value from V1
-//   // your code here
-  edgentConsole.printf("Data %d hehe\n", pinData);
+#define KXNSHOW(x)   Serial.print(#x"\t"); Serial.println(x);
+// This is called for all virtual pins, that don't have BLYNK_WRITE handler
+BLYNK_WRITE_DEFAULT() {
+  Serial.print("input V");
+  Serial.print(request.pin);
+  Serial.println(":");
+  // Print all parameter values
+  for (auto i = param.begin(); i < param.end(); ++i) {
+    Serial.print("* ");
+    Serial.println(i.asString());
+  }
+
+  double myDouble = param.asDouble();
+  String myString = param.asString();
+  int myInt = param.asInt();
+
+  KXNSHOW(myDouble);
+  KXNSHOW(myString);
+  KXNSHOW(myInt);
 }

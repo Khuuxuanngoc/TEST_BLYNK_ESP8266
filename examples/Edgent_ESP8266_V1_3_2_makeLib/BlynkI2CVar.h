@@ -3,7 +3,6 @@
 
 #include "Arduino.h"
 #include "Wire.h"
-#include "BlynkVarPin.h"
 #include "kxnDebug.h"
 
 /* -------------------------------------------------------------------------- */
