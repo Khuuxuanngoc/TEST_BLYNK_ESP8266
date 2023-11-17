@@ -11,6 +11,21 @@ void console_init()
 
   edgentConsole.print("\n>");
 
+  edgentConsole.addCommand("ATW", [](int argc, const char** argv) {
+    if (argc < 2) {
+      edgentConsole.print(R"json({"status":"error","msg":"invalid arguments. expected: <numID> <value>"})json" "\n");
+      return;
+    }
+    // String auth = argv[0];
+    // String ssid = argv[1];
+    // String pass = (argc >= 3) ? argv[2] : "";
+
+    String tempStrID = argv[0];
+    String tempStrVal = argv[1];
+
+    Blynk.virtualWrite(tempStrID.toInt(), tempStrVal);
+  });
+
   edgentConsole.addCommand("reboot", []() {
     edgentConsole.print(R"json({"status":"OK","msg":"rebooting wifi module"})json" "\n");
     delay(100);
@@ -55,6 +70,77 @@ void console_init()
     configStore = configDefault;
     CopyString(ssid, configStore.wifiSSID);
     CopyString(pass, configStore.wifiPass);
+    CopyString(auth, configStore.cloudToken);
+
+    BlynkState::set(MODE_SWITCH_TO_STA);
+  });
+
+  edgentConsole.addCommand("SSID", [](int argc, const char** argv) {
+    if (argc < 1) {
+      edgentConsole.print(R"json({"status":"error","msg":"invalid arguments. expected: <ssid>"})json" "\n");
+      return;
+    }
+    String ssid = argv[0];
+
+    // if (auth.length() != 32) {
+    //   edgentConsole.print(R"json({"status":"error","msg":"invalid token size"})json" "\n");
+    //   return;
+    // }
+
+    // edgentConsole.print(R"json({"status":"OK","msg":"SSID OK"})json" "\n");
+
+    configStore = configDefault;
+    CopyString(ssid, configStore.wifiSSID);
+    // CopyString(pass, configStore.wifiPass);
+    // CopyString(auth, configStore.cloudToken);
+
+    BlynkState::set(MODE_SWITCH_TO_STA);
+  });
+
+  edgentConsole.addCommand("PASS", [](int argc, const char** argv) {
+    if (argc < 1) {
+      edgentConsole.print(R"json({"status":"error","msg":"invalid arguments. expected: <pass>"})json" "\n");
+      return;
+    }
+    // String auth = argv[0];
+    // String ssid = argv[1];
+    String pass = (argc >= 3) ? argv[0] : "";
+
+    // if (auth.length() != 32) {
+    //   edgentConsole.print(R"json({"status":"error","msg":"invalid token size"})json" "\n");
+    //   return;
+    // }
+
+    // edgentConsole.print(R"json({"status":"OK","msg":"trying to connect..."})json" "\n");
+
+    configStore = configDefault;
+    // CopyString(ssid, configStore.wifiSSID);
+    CopyString(pass, configStore.wifiPass);
+    // CopyString(auth, configStore.cloudToken);
+
+    BlynkState::set(MODE_SWITCH_TO_STA);
+  });
+
+  edgentConsole.addCommand("AUTH", [](int argc, const char** argv) {
+    if (argc < 1) {
+      edgentConsole.print(R"json({"status":"error","msg":"invalid arguments. expected: <auth>"})json" "\n");
+      return;
+    }
+    String auth = argv[0];
+    // String ssid = argv[1];
+    // String pass = (argc >= 3) ? argv[0] : "";
+
+    if (auth.length() != 32) {
+      // edgentConsole.print(R"json({"status":"error","msg":"invalid token size"})json" "\n");
+      edgentConsole.printf("invalid token size: %d\n", auth.length());
+      return;
+    }
+
+    edgentConsole.print(R"json({"status":"OK","msg":"trying to connect..."})json" "\n");
+
+    configStore = configDefault;
+    // CopyString(ssid, configStore.wifiSSID);
+    // CopyString(pass, configStore.wifiPass);
     CopyString(auth, configStore.cloudToken);
 
     BlynkState::set(MODE_SWITCH_TO_STA);
@@ -210,20 +296,23 @@ BLYNK_WRITE(InternalPinDBG) {
 #define KXNSHOW(x)   Serial.print(#x"\t"); Serial.println(x);
 // This is called for all virtual pins, that don't have BLYNK_WRITE handler
 BLYNK_WRITE_DEFAULT() {
-  Serial.print("input V");
+  Serial.print("EATR ");
   Serial.print(request.pin);
-  Serial.println(":");
-  // Print all parameter values
-  for (auto i = param.begin(); i < param.end(); ++i) {
-    Serial.print("* ");
-    Serial.println(i.asString());
-  }
+  Serial.print(" ");
+  Serial.print(param.asString());
+  Serial.print("\n");
 
-  double myDouble = param.asDouble();
-  String myString = param.asString();
-  int myInt = param.asInt();
+  // // Print all parameter values
+  // for (auto i = param.begin(); i < param.end(); ++i) {
+  //   Serial.print("* ");
+  //   Serial.println(i.asString());
+  // }
 
-  KXNSHOW(myDouble);
-  KXNSHOW(myString);
-  KXNSHOW(myInt);
+  // double myDouble = param.asDouble();
+  // String myString = param.asString();
+  // int myInt = param.asInt();
+
+  // KXNSHOW(myDouble);
+  // KXNSHOW(myString);
+  // KXNSHOW(myInt);
 }

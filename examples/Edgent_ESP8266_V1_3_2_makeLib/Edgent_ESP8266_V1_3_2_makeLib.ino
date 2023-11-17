@@ -72,7 +72,7 @@ void testConstStrPara(const char * p_tempConstStr){
 #include "BlynkEdgent.h"
 
 char arr_StringTemplateId[100] = "TMPL6dOjDR5a3";
-char arr_StringTemplateName[100] = "kxn Quickstart Template";
+char arr_StringTemplateName[100] = "Quickstart Template";
 
 // char auth[100] = BLYNK_AUTH_TOKEN;
 // char ssid[50] = "DESKTOPkxn";     // Key in your wifi name. You can check with your smart phone for your wifi name
@@ -82,41 +82,7 @@ void kxn_BlynkInit(){
     // Blynk.begin(auth, ssid, pass);
 }
 
-#define KXNSHOW(x)   Serial.print(#x"\t"); Serial.println(x);
-
-// BLYNK_WRITE_DEFAULT() {
-//   Serial.print("input V");
-//   Serial.print(request.pin);
-//   Serial.println(":");
-//   // Print all parameter values
-//   for (auto i = param.begin(); i < param.end(); ++i) {
-//     Serial.print("* ");
-//     Serial.println(i.asString());
-//   }
-
-//   double myDouble = param.asDouble();
-//   String myString = param.asString();
-//   int myInt = param.asInt();
-
-//   KXNSHOW(myDouble);
-//   KXNSHOW(myString);
-//   KXNSHOW(myInt);
-//   if(myInt == 0){
-//     Blynk.logEvent("baotrom", "Có trộm ở nhà");
-//   }
-// }
-
-// BLYNK_WRITE(V1) //V1 is the Virtual Pin
-// {
-// //   int pinData = param.asInt(); // getting value from V1
-// //   // your code here
-// }
-
-// #include "BlynkEdgent.h"
-
-// #include "BlynkI2CVar.h"
-// #include "kxnRunBlynk.h"
-// #include "BlynkEdgent.h"
+//#define KXNSHOW(x)   Serial.print(#x"\t"); Serial.println(x);
 
 void setup()
 {
@@ -131,4 +97,3 @@ void loop() {
   BlynkEdgent.run();
   // GetDataFromSerial(&Serial);
 }
-

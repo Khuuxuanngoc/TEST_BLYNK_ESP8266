@@ -2,7 +2,7 @@
 #define pin_led 2 // led onboar
 #define pin_button 0
 #include <ESP8266WiFi.h> // Enable the use of wifi module. Make sure you downloaded and installed the ESP8266 library
-#include <BlynkSimpleEsp8266.h>
+
 /**
  * @brief Note
  * 
@@ -15,7 +15,7 @@ int flag_V1 = 0;
 #define BLYNK_TEMPLATE_ID "TMPL6_UMd7kUH"
 #define BLYNK_TEMPLATE_NAME "kxntemplate8266"
 #define BLYNK_AUTH_TOKEN "bw9Dlfusw60bHR6YVmZux9S_RSOmw2iM"
-
+#include <BlynkSimpleEsp8266.h>
 ////
 //#define BLYNK_AUTH_TOKEN "CgGJDmfA9o7ELQEHMXcVFFAcWVySHbiS"
 char auth[] = BLYNK_AUTH_TOKEN;
@@ -47,7 +47,7 @@ void loop()
   Blynk.run();
   if (digitalRead(pin_button) == LOW)
   {
-    Blynk.virtualWrite(V0, 400);
+    Blynk.virtualWrite(V0, "400");
     Serial.println("button LOW");
   }
   else if (digitalRead(pin_button) == HIGH)

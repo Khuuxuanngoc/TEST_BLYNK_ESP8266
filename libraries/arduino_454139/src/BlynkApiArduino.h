@@ -213,7 +213,7 @@ void BlynkApi<Proto>::processCmd(const void* buff, size_t len)
         BlynkReq req = { pin };
         callReadHandler(req);
     } break;
-    case BLYNK_HW_VW: {
+    case BLYNK_HW_VW: { // kxn xem
         ++it;
         char* start = (char*)it.asStr();
         BlynkParam param2(start, len - (start - (char*)buff));
